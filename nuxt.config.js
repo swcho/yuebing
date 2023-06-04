@@ -438,11 +438,17 @@ export default {
   build: {
     mode: 'production',
     transpile: ['vee-validate/dist/rules'],
-    extend (config) {
+    extend (config, ctx) {
       config.module.rules.push({
         test: /^README.md$/i,
         use: 'ignore-loader'
       })
+
+      // [Visual Studio Code로 NuxtJS 디버깅하기 | 우당탕탕 개발자](https://yeonseo.github.io/posts/NuxtWithVSCode-post/)
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
+      console.log('build.extend', config)
     }
   }
 }
