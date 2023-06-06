@@ -413,11 +413,11 @@ function updateUserRecord (proposed, successHandler) {
     update.username = user.username // don't allow any username changes for now
     logger.info(`updateUserRecord: updating backend with: ${JSON.stringify(update)}`)
     try {
-      const count = await system.api.writeFile(userKey(user.username), JSON.stringify(update))
+      const count = await system.api.writeFile(userKey(user.username), JSON.stringify(update, null, 2))
       if (emailKey(update.email) !== emailKey(user.email)) {
         // update email index if address changed
         await system.api.remove(emailKey(user.email))
-        await system.api.writeFile(emailKey(user.email), JSON.stringify(user.username))
+        await system.api.writeFile(emailKey(user.email), JSON.stringify(user.username, null, 2))
       }
       await successHandler(count, update)
     } catch (e) {

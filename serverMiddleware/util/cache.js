@@ -77,7 +77,7 @@ const getCachedMetadata = async (sourceAndPath) => {
 }
 
 const writeMetadataFile = async (sourceAndPath, meta) =>
-  await system.api.writeFile(cachedMetaPath(sourceAndPath), JSON.stringify(meta))
+  await system.api.writeFile(cachedMetaPath(sourceAndPath), JSON.stringify(meta, null, 2))
 
 const getCachedSelectedThumbnail = async (sourceAndPath) => await redis.getJson(redisSelectedThumbnailCacheKey(sourceAndPath))
 
@@ -119,7 +119,7 @@ const findSelectedThumbnail = async (sourceAndPath) => {
 }
 
 const setSelectedThumbnail = async (sourceAndPath, thumb) => {
-  const bytesWritten = await system.api.writeFile(thumbFile(sourceAndPath), JSON.stringify(thumb))
+  const bytesWritten = await system.api.writeFile(thumbFile(sourceAndPath), JSON.stringify(thumb, null, 2))
   if (bytesWritten) {
     await setCachedSelectedThumbnail(sourceAndPath, thumb)
   }

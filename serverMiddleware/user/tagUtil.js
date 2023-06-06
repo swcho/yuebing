@@ -84,7 +84,7 @@ const registerPath = async (sourceAndPath, meta) => {
   const pathIndex = getPathIndex(sourceAndPath)
   logger.debug(`${logPrefix} writing pathIndex ${pathIndex}`)
   try {
-    await system.api.writeFile(pathIndex, JSON.stringify(meta))
+    await system.api.writeFile(pathIndex, JSON.stringify(meta, null, 2))
   } catch (e) {
     logger.error(`${logPrefix} error writing pathIndex: ${pathIndex}: ${e}`)
     throw e

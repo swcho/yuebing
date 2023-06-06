@@ -146,7 +146,7 @@ const SYSTEM = {
           storedConfig = {}
         }
         const merged = SYSTEM[`${config}Config`] = Object.assign({}, nuxt[`${config}RuntimeConfig`], storedConfig)
-        SYSTEM.api.writeFile(configFile, JSON.stringify(merged))
+        SYSTEM.api.writeFile(configFile, JSON.stringify(merged, null, 2))
         SYSTEM.api.find = async (dir, prefix) => {
           const pth = dir.endsWith('/') ? dir : dir + '/'
           try {
@@ -242,7 +242,7 @@ const SYSTEM = {
         if (JSON.stringify(SYSTEM[topLevel]) === JSON.stringify(updatedConfig[topLevel])) {
           logger.info(`updateConfig(${topLevel}): not changed, not writing to storage`)
         } else {
-          await SYSTEM.api.writeFile(`${topLevel}.json`, JSON.stringify(updatedConfig[topLevel]))
+          await SYSTEM.api.writeFile(`${topLevel}.json`, JSON.stringify(updatedConfig[topLevel], null, 2))
           SYSTEM[topLevel] = updatedConfig[topLevel]
           for (const handler of updateHandlers) {
             handler()

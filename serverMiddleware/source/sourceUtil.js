@@ -126,7 +126,7 @@ async function createSource (source) {
   const now = Date.now()
   const sourceRecord = Object.assign({}, source, { ctime: now, mtime: now })
   try {
-    const bytesWritten = await system.api.writeFile(sourceKey(source.name), JSON.stringify(sourceRecord))
+    const bytesWritten = await system.api.writeFile(sourceKey(source.name), JSON.stringify(sourceRecord, null, 2))
     if (bytesWritten > 0) {
       listSourceCache.clear()
     }

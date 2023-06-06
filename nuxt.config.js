@@ -448,7 +448,7 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
-      console.log('build.extend', config)
+      // console.log('build.extend', config)
     }
   }
 }

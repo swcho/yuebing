@@ -142,7 +142,7 @@ function queueUploadAsset (sourcePath, profile, outfile, xformJob, jobPrefix) {
     jobPrefix,
     file: UPLOAD_QUEUE_DIR + `${Date.now()}_${shasum(outfile + ':' + profile + ':' + JSON.stringify(xformJob))}.json`
   }
-  fs.writeFileSync(job.file, JSON.stringify(job))
+  fs.writeFileSync(job.file, JSON.stringify(job, null, 2))
   if (UPLOADS_CONCURRENCY > 0) {
     uploadQueue().add(UPLOAD_JOB_NAME, job)
   }
