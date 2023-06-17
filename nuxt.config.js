@@ -450,5 +450,10 @@ export default {
       }
       // console.log('build.extend', config)
     }
+  },
+  watchers: {
+    webpack: {
+      ignored: /.git/
+    }
   }
 }
